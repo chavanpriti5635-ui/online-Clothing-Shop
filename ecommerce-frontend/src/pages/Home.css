@@ -1,7 +1,7 @@
 .view-all-container {
-  display: flex;           /* enable flexbox */
-  justify-content: center; /* center horizontally */
-  margin: 20px 0;          /* optional spacing */
+  display: flex;           
+  justify-content: center; 
+  margin: 20px 0;          
 }
 
 .view-all-btn {
@@ -22,3 +22,7 @@
 .product-image:hover {
   transform: scale(1.5);
 }
+
+
+
+

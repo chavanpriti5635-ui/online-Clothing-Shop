@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +10,71 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+/* GLOBAL RESET */
+* {
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* CODE FONT */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* RESPONSIVE IMAGES */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* CONTAINER FIX */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 16px;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* NAVBAR STACK */
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* PRODUCT GRID */
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* BUTTONS & INPUTS */
+  button,
+  input,
+  select,
+  textarea {
+    width: 100%;
+  }
 }

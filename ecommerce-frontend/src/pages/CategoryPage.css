@@ -1,4 +1,4 @@
-.category-navbar {
+ .category-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,7 +53,7 @@
   background-color: #fff;
   overflow: hidden;
   transition: box-shadow 0.3s ease;
-  padding: 0;                 /* REMOVE padding */
+  padding: 0;                 
 }
 
 
@@ -74,8 +74,8 @@
 }
 
 .product-image {
-  height: 520px;              /* Shree.com tall image */
-  background: #f8f6f4;        /* light beige background */
+  height: 520px;              
+  background: #f8f6f4;        
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,8 +84,8 @@
 
 .product-image img {
   height: 100%;
-  width: auto;                /* VERY IMPORTANT */
-  object-fit: contain;        /* FULL model visible */
+  width: auto;                
+  object-fit: contain;        
   display: block;
 }
 .add-to-cart-btn {
@@ -177,4 +177,4 @@
   font-weight: normal;
   text-transform: capitalize;
   color: #555;
-}
+} 
