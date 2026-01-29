@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { QRCodeCanvas } from "qrcode.react";
+
 import axios from "axios";
 import "./Checkout.css";
 
@@ -146,17 +146,7 @@ const Checkout = () => {
               <option value="upi">UPI</option>
             </select>
 
-            {/* UPI QR */}
-            {showQR && (
-              <div className="upi-qr">
-                <h4>Scan to Pay via UPI</h4>
-                <QRCodeCanvas
-                  value={`upi://pay?pa=pritichavan9080@okicici&pn=ByShreeRAM&am=${totalPrice}&cu=INR`}
-                  size={220}
-                />
-                <p>Amount: ₹{totalPrice}</p>
-              </div>
-            )}
+            
 
             <button onClick={handlePlaceOrder} className="place-order-btn">
               Place Order
