@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Checkout.css";
 
-// ✅ Railway backend URL (NO trailing slash)
 const API_URL =
   "https://creative-generosity-production-b9fb.up.railway.app/api";
 
-const Checkout = () => {
+function Checkout() {
   const [cartItems, setCartItems] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,19 +15,16 @@ const Checkout = () => {
 
   const navigate = useNavigate();
 
-  // Load cart from localStorage
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItems(items);
   }, []);
 
-  // Calculate total price
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
     0
   );
 
-  // Place order
   const handlePlaceOrder = async () => {
     if (!name || !email || !address) {
       alert("Please fill all the fields");
@@ -41,71 +37,67 @@ const Checkout = () => {
     }
 
     const orderData = {
-      name,
-      email,
-      address,
-      paymentMethod,
+      name: name,
+      email: email,
+      address: address,
+      paymentMethod: paymentMethod,
       total: totalPrice,
       orderDate: new Date().toISOString(),
-      items: cartItems.map((item) => ({
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity || 1,
-      })),
+      items: cartItems.map(function (item) {
+        return {
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity || 1,
+        };
+      }),
     };
 
     try {
-      await axios.post(`${API_URL}/orders`, orderData);
-
+      await axios.post(API_URL + "/orders", orderData);
       alert("Order placed successfully!");
       localStorage.removeItem("cart");
       setCartItems([]);
       navigate("/");
     } catch (err) {
-      console.error("Error placing order:", err);
-
-      if (err.response?.data?.message) {
-        alert(err.response.data.message);
-      } else {
-        alert("Server not reachable");
-      }
+      alert("Order failed. Please try again.");
+      console.error(err);
     }
   };
 
   return (
     <div className="checkout-container">
       <h2>
-        Your Order Details{" "}
-        <span className="checkout-action">- Confirm & Pay</span>
+        Your Order Details
+        <span className="checkout-action"> - Confirm & Pay</span>
       </h2>
 
       {cartItems.length === 0 ? (
         <p className="empty-cart">Your cart is empty.</p>
       ) : (
-        <>
-          {/* CART SUMMARY */}
+        <div>
           <div className="cart-summary">
             <h3>Cart Items</h3>
 
-            {cartItems.map((item, index) => (
-              <div className="cart-item" key={index}>
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="checkout-image"
-                />
-                <div className="cart-details">
-                  <h4>{item.name}</h4>
-                  <p>₹{item.price}</p>
-                  <p>Qty: {item.quantity || 1}</p>
+            {cartItems.map(function (item, index) {
+              return (
+                <div className="cart-item" key={index}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="checkout-image"
+                  />
+                  <div className="cart-details">
+                    <h4>{item.name}</h4>
+                    <p>₹{item.price}</p>
+                    <p>Qty: {item.quantity || 1}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             <h3 className="total-price">Total: ₹{totalPrice}</h3>
           </div>
 
-          {/* SHIPPING FORM */}
           <div className="checkout-form">
             <h3>Shipping Details</h3>
 
@@ -137,15 +129,14 @@ const Checkout = () => {
               <option value="upi">UPI</option>
             </select>
 
-            <button onClick={handlePlaceOrder} className="place-order-btn">
+            <button className="place-order-btn" onClick={handlePlaceOrder}>
               Place Order
             </button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
-};
+}
 
 export default Checkout;
-
